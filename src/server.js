@@ -1,7 +1,16 @@
 const express = require('express')
 const path = require ('path')
 
+
+const db = require('./database')
+const routes = require('./routes')
+
 const app = express()
+
+
+//conexao com banco de dadod
+db.connect()
+
 
 //definindo o template engine
 app.set('view engine', 'ejs')
@@ -14,12 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 //habilita server para receber dados via post (formulario)
 app.use(express.urlencoded({extended:true}))
 
-//rotas
-app.get('/', (req,res)=>{
-  res.render('index',{
-    title: 'Pagina Inmicia'
-  })
-})
+
+//definmindo as rotasrotas
+app.use('/', routes)
+
+app.use('/register', routes)
+
 
 //404 error (not found)
 app.use((req,res)=>{
@@ -31,4 +40,3 @@ app.use((req,res)=>{
 const port = process.env.PORT || 8080
 app.listen(port, ()=> console.log(`Server is listening on ${port}`))
 
-g
