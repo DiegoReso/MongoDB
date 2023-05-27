@@ -31,6 +31,7 @@ app.use('/', routes)
 app.use('/register', routes)
 
 
+
 //404 error (not found)
 app.use((req,res)=>{
   res.send('Pagina nao encontrada')

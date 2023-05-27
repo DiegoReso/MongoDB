@@ -1,3 +1,4 @@
+const { query } = require('express')
 const CustomersModel = require('../models/customers')
 const {crypto} = require('../utils/password')
 
@@ -42,20 +43,65 @@ res.render('register',{
 
 
 
-async function listUsers(req,res){
+async function list(req,res){
 
  const users = await CustomersModel.find()
 
 
-  res.render('listUsers', {
+  res.render('list', {
     title: 'Lista de Usuarios',
     users,
   })
 }
 
 
+
+async function formEdit (req,res){
+
+  const {id} = req.query
+
+  const user = await CustomersModel.findById(id)
+
+  res.render('edit',{
+    title: 'Editar Usuarios',
+    user,
+  })
+}
+
+
+async function edit(req,res){
+  const {
+    name,
+    age,
+    email,
+    
+  } = req.body
+
+const {id} = req.params
+
+const user = await CustomersModel.findById(id)
+
+user.name = name
+user.age = age
+user.email = email
+
+user.save()
+
+res.render('edit',{
+  title: 'Editar Usuarios',
+  user,
+  message: 'Usuario alterado com sucesso'
+})
+
+}
+
+
+
+
 module.exports = {
  index,
  add,
- listUsers,
+ list,
+ formEdit,
+ edit,
 }
