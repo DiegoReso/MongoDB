@@ -6,6 +6,11 @@
 <body>
 
   <h1>Cadastro de clientes</h1>
+  <%-include ('partials/nav.ejs')  %>
+
+  <% if(typeof message  !==  'undefined'){%>
+    <%=message%>
+  <% } %>
 
   <form action="/register/add" method="POST">
     <div>
@@ -34,7 +39,7 @@
 
   </form>
 
-
+  
 
   <%-include ('partials/foot.ejs')  %>
   

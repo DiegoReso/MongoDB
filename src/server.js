@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}))
 
 
-//definmindo as rotasrotas
+//definindo as rotasrotas
 app.use('/', routes)
 
 app.use('/register', routes)
