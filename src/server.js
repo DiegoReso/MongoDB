@@ -8,7 +8,8 @@ const routes = require('./routes')
 const app = express()
 
 
-//conexao com banco de dadod
+
+//conexao com banco de dados
 db.connect()
 
 
