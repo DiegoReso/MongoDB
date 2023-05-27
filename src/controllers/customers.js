@@ -11,7 +11,6 @@ function index (req,res){
 }
 
 
-
 async function add(req,res){
   const {
     name,
@@ -41,8 +40,6 @@ res.render('register',{
 
 
 
-
-
 async function list(req,res){
 
  const users = await CustomersModel.find()
@@ -53,7 +50,6 @@ async function list(req,res){
     users,
   })
 }
-
 
 
 async function formEdit (req,res){
@@ -79,6 +75,7 @@ async function edit(req,res){
 
 const {id} = req.params
 
+
 const user = await CustomersModel.findById(id)
 
 user.name = name
@@ -86,6 +83,7 @@ user.age = age
 user.email = email
 
 user.save()
+
 
 res.render('edit',{
   title: 'Editar Usuarios',
@@ -97,11 +95,22 @@ res.render('edit',{
 
 
 
+async function remove(req,res){
+
+  const {id} = req.params
+
+ const remove = await CustomersModel.deleteOne({_id : id})
+
+ if(remove.ok){
+  res.redirect('list')
+ }
+}
 
 module.exports = {
- index,
- add,
- list,
- formEdit,
- edit,
+  index,
+  add,
+  list,
+  formEdit,
+  edit,
+  remove,
 }
